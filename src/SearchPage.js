@@ -11,12 +11,14 @@ class SearchPage extends React.Component {
     }
 
     handleTextChange = (e) => {
-        this.setState({ text: e.target.value });
-        BooksAPI.search(e.target.value).then(data => {
-            this.setState({
-                books: (data !== null && data !== undefined) ? data : []
-            })
-        });
+        this.setState({ text: e.target.value }, () => {
+                BooksAPI.search(e.target.value).then(data => {
+                    this.setState({
+                        books: (data !== null && data !== undefined) ? data : []
+                    })
+                });
+            }
+        );
     }
 
     render () {
